@@ -35,6 +35,14 @@ describe('controllers unit test', function(){
     });
     var results = scope.getFirstAndRestSentence("Hello? This is Sung");
     expect(results[0]).toEqual('Hello?');
+
+    // mine to increase branch coverage by including additional cases
+    var results = scope.getFirstAndRestSentence("Hell\no? This is Sung");
+    expect(results[0]).toEqual('Hell\n');
+    var results = scope.getFirstAndRestSentence("Hello. There? ");
+    expect(results[0]).toEqual('Hello.');
+    var results = scope.getFirstAndRestSentence("Hello");
+    expect(results[0]).toEqual('Hello');
   }));
 
 });

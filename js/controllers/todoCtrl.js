@@ -30,8 +30,9 @@ if (!roomId || roomId.length === 0) {
 	roomId = "all";
 }
 
-// TODO: Please change this URL for your app
-var firebaseURL = "https://classquestion.firebaseio.com/";
+// TODO_DONE: Please change this URL for your app
+// var firebaseURL = "https://classquestion.firebaseio.com/";
+var firebaseURL = "https://brilliant-torch-2985.firebaseio.com/";
 
 
 $scope.roomId = roomId;
@@ -85,9 +86,9 @@ $scope.getFirstAndRestSentence = function($string) {
 	var firstIndex = -1;
 	for (var i in separators) {
 		var index = $string.indexOf(separators[i]);
-		if (index == -1) continue;
-		if (firstIndex == -1) {firstIndex = index; continue;}
-		if (firstIndex > index) {firstIndex = index;}
+		if (index == -1) continue; // if not found skip to next separator
+		if (firstIndex == -1) {firstIndex = index; continue;} // if first occurence of separator
+		if (firstIndex > index) {firstIndex = index;} 
 	}
 
 	if (firstIndex !=-1) {
@@ -139,6 +140,18 @@ $scope.addEcho = function (todo) {
 
 	// Disable the button
 	$scope.$storage[todo.$id] = "echoed";
+};
+
+
+$scope.decEcho = function (todo) {
+    $scope.editedTodo = todo;
+    todo.echo = todo.echo - 1;
+    // Hack to order using this order.
+    todo.order = todo.order -1;
+    $scope.todos.$save(todo);
+
+    // Disable the button
+    $scope.$storage[todo.$id] = "echoed";
 };
 
 $scope.doneEditing = function (todo) {
